@@ -108,6 +108,8 @@ describe "Robot Might Have Obstructions" do
         expect(robot.report).to eq([0,0,"NORTH"])
     end
 
+    # some of my logic is happening in the controller for these, have to work them out
+
     # it "the AVOID command should be discarded if it tells the robot to avoid the current coordinates" do
     #     robot = ToyRobot.new
     #     robot.place(0,0,"NORTH")
@@ -118,3 +120,12 @@ describe "Robot Might Have Obstructions" do
     # it "the AVOID command should be discarded if the given coordinates fall outside of the table surface" do
     # end
 end
+
+# describe "Once on table, subsequent PLACE commands could leave out the directions" do
+#     it "should change to new coordinates without a new direction" do
+#         robot = ToyRobot.new
+#         robot.place(0,0,"NORTH")
+#         robot.place(2,3,"")
+#         expect(robot.report).to eq([2,3,"NORTH"])
+#     end
+# end

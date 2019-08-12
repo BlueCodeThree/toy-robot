@@ -1,12 +1,16 @@
 require_relative 'tabletop'
 
 class ToyRobot
-    attr_reader :tabletop, :x, :y
+    attr_reader :tabletop, :x, :y, :direction
     def initialize
         @tabletop = TableTop.new
+        @direction = ""
     end
 
     def place(x, y, direction_facing)
+        if direction_facing == nil
+            direction_facing = @direction
+        end
         if @tabletop.check_avoid(x,y) && @tabletop.check_direction_is_valid(direction_facing) && @tabletop.check_placed_on_grid(x,y)
             @x = x
             @y = y
