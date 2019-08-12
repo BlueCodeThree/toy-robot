@@ -2,10 +2,10 @@ require_relative '../models/toy_robot'
 
 describe "Toy Robot Not Placed Correctly" do
     it "shouldn't work if not placed on the grid - x axis" do
-        expect( ToyRobot.new.place(5,0,"NORTH") ).to be false
+        expect( ToyRobot.new.place(7,0,"NORTH") ).to be false
     end
     it "shouldn't work if not placed on the grid - y axis" do
-        expect( ToyRobot.new.place(0,5,"NORTH") ).to be false
+        expect( ToyRobot.new.place(0,7,"NORTH") ).to be false
     end
     it "should return false if direction not valid" do
         expect( ToyRobot.new.place(0,0,"42") ).to be false
@@ -40,9 +40,11 @@ describe "Toy Robot Moving" do
         robot.move
         robot.move
         robot.move
-        expect(robot.move).to eq(4)
+        robot.move
+        robot.move
+        expect(robot.move).to eq(6)
         expect(robot.move).to eq(nil)
-        expect(robot.report).to eq([0,4,"NORTH"])
+        expect(robot.report).to eq([0,6,"NORTH"])
     end
     it "should not move past the boundaries of the tabletop - bottom" do
         robot = ToyRobot.new
@@ -82,7 +84,9 @@ describe "Toy Robot Moving Left and Right" do
         robot.move
         robot.move
         robot.move
-        expect(robot.report).to eq([3,4, "NORTH"])
+        robot.move
+        robot.move
+        expect(robot.report).to eq([3,6, "NORTH"])
     end
 end
 describe "Toy Robot Can Be Placed Again" do
