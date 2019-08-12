@@ -30,31 +30,55 @@ class ToyRobot
             @x += 1 if @x < @tabletop.x_max && @tabletop.check_avoid(@x + 1, @y)
         elsif @direction == "WEST"
             @x -= 1 if @x > @tabletop.x_min && @tabletop.check_avoid(@x - 1, @y)
+        elsif @direction == "NORTH EAST"
+            (@y += 1 && @x += 1) if @x < @tabletop.x_max && @y < @tabletop.y_max && @tabletop.check_avoid(@x + 1, @y + 1)
+        elsif @direction == "NORTH WEST"
+            (@y += 1 && @x -= 1) if @y < @tabletop.y_max && @x > @tabletop.x_min && @tabletop.check_avoid(@x - 1, @y + 1)
+        elsif @direction == "SOUTH EAST"
+            (@y -= 1 && @x += 1) if @y > @tabletop.y_min && @x < @tabletop.x_max && @tabletop.check_avoid(@x + 1, @y - 1)
+        elsif @direction == "SOUTH WEST"
+            (@y -= 1 && @x -= 1) if @y > @tabletop.y_min && @x > @tabletop.x_min && @tabletop.check_avoid(@x - 1, @y - 1)
         end
     end
 
     def left
         case @direction
         when "NORTH"
+            @direction = "NORTH WEST"
+        when "NORTH WEST"
             @direction = "WEST"
-        when "EAST"
-            @direction = "NORTH"
-        when "SOUTH"
-            @direction = "EAST"
         when "WEST"
-            @direction = "SOUTH"
+            @direction = "SOUTH WEST"
+        when "SOUTH WEST"
+            @directon = "SOUTH"
+        when "SOUTH"
+            @direction = "SOUTH EAST"
+        when "SOUTH EAST"
+            @direction = "EAST"
+        when "EAST"
+            @direction = "NORTH EAST"
+        when "NORTH EAST"
+            @direction = "NORTH"
         end
     end
 
     def right
         case @direction
         when "NORTH"
+            @direction = "NORTH EAST"
+        when "NORTH EAST"
             @direction = "EAST"
         when "EAST"
+            @direction = "SOUTH EAST"
+        when "SOUTH EAST"
             @direction = "SOUTH"
         when "SOUTH"
+            @direction = "SOUTH WEST"
+        when "SOUTH WEST"
             @direction = "WEST"
         when "WEST"
+            @direction = "NORTH WEST"
+        when "NORTH WEST"
             @direction = "NORTH"
         end
     end
