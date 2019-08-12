@@ -2,9 +2,9 @@ class TableTop
     attr_reader :x_max, :x_min, :y_max, :y_min
     def initialize
         @x_min = 0
-        @x_max = 4
+        @x_max = 6
         @y_min = 0
-        @y_max = 4
+        @y_max = 6
     end
 
     def check_direction_is_valid(direction)
