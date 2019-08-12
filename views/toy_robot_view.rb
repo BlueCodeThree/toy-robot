@@ -9,6 +9,11 @@ class ToyRobotView
         puts "Your input was invalid. Please try again."
     end
 
+    def not_placed
+        puts
+        puts "Your robot could not be placed"
+    end
+
     def placed
         puts
         puts "Your toy robot has been placed on the tabletop."

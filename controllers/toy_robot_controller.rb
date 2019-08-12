@@ -17,13 +17,31 @@ class ToyRobotController
     end
 
     def place_robot(input)
-        if @toy_robot_model.place(input[1].to_i, input[2].to_i, input[3] )
+        x = input[1].to_i
+        y = input[2].to_i
+        direction = input[3]
+
+        if @toy_robot_model.place(x, y, direction)
             @toy_robot_view.placed
             return true
         else
-            @toy_robot_view.error
+            @toy_robot_view.not_placed
         end
     end
+
+    def place_obstacle(input)
+        avoid_x = input[1].to_i
+        avoid_y = input[2].to_i
+        if (@toy_robot_model.x == avoid_x) && (@toy_robot_model.y == avoid_y)
+        else
+            if @toy_robot_model.tabletop.check_placed_on_grid(avoid_x, avoid_y)
+                @toy_robot_model.tabletop.add_coord_to_avoid(avoid_x, avoid_y)
+            end
+        end
+
+    end
+
+
 
     def run
         place
@@ -44,6 +62,8 @@ class ToyRobotController
             else
                 if input.split(/ |, |,/)[0] == "PLACE"
                     place_robot(input.split(/ |, |,/))
+                elsif input.split(/ |, |,/)[0] == "AVOID"
+                    place_obstacle(input.split(/ |, |,/))
                 else
                     @toy_robot_view.error
                 end

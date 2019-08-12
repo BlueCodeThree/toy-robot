@@ -41,10 +41,9 @@ describe "Toy Robot Moving" do
         robot.move
         robot.move
         robot.move
-        robot.move
-        expect(robot.move).to eq(6)
+        expect(robot.move).to eq(5)
         expect(robot.move).to eq(nil)
-        expect(robot.report).to eq([0,6,"NORTH"])
+        expect(robot.report).to eq([0,5,"NORTH"])
     end
     it "should not move past the boundaries of the tabletop - bottom" do
         robot = ToyRobot.new
@@ -85,8 +84,7 @@ describe "Toy Robot Moving Left and Right" do
         robot.move
         robot.move
         robot.move
-        robot.move
-        expect(robot.report).to eq([3,6, "NORTH"])
+        expect(robot.report).to eq([3,5, "NORTH"])
     end
 end
 describe "Toy Robot Can Be Placed Again" do
@@ -99,4 +97,24 @@ describe "Toy Robot Can Be Placed Again" do
         robot.place(2,3,"WEST")
         expect(robot.report).to eq([2,3,"WEST"])
     end
+end
+
+describe "Robot Might Have Obstructions" do
+    it "the place command should be discarded if it places the robot on an obstructed cell" do
+        robot = ToyRobot.new
+        robot.place(0,0,"NORTH")
+        robot.tabletop.add_coord_to_avoid(1,2)
+        robot.place(1,2,"NORTH")
+        expect(robot.report).to eq([0,0,"NORTH"])
+    end
+
+    # it "the AVOID command should be discarded if it tells the robot to avoid the current coordinates" do
+    #     robot = ToyRobot.new
+    #     robot.place(0,0,"NORTH")
+    #     robot.place_obstacle("0,0")
+    #     expect(robot.tabletop.avoid).to eq([])
+    # end
+
+    # it "the AVOID command should be discarded if the given coordinates fall outside of the table surface" do
+    # end
 end
